@@ -2,25 +2,36 @@ const API = {
 
 	btnSearchFull: document.getElementById("btn-search-full"),
 	btnSearchId: document.getElementById("btn-search-id"),
-	// inputSearchSynch: document.getElementById("city​-synch"),
 
 	selectSynch:document.getElementById("select-synch"),
 
 	divEstate: document.getElementById("estate"),
+	divEstateId: document.getElementById("estate-id"),
+
+	showItem: function(res) {
+
+		let html = `
+			<div class="estate-wrapper">
+				<div>${res.data.city}</div>
+				<div>${res.data.apartment}</div>
+				<div>${res.data.price}</div>
+				<div>${res.data.street}</div>
+			</div>
+		`;
+
+		API.divEstateId.innerHTML = html;
+	},
 
 	completeSelect: function(res) {
-		// for (let i = 0; i < res.data.length; i++) {
-		// 	let option = document.createElement("option");
-		// 	option.text = res.data[i].city;
-		// 	API.selectSynch.add(option);
-		// }
-
 		let id = 0;
+
 		for (let i = 0; i < res.data.length; i++) {
+
 			let option = document.createElement("option");
 			++id;
 			option.id = id;
 			option.text = res.data[i].city;
+			option.dataset.id = res.data[i].id;
 
 			if(!document.getElementById(id)) {
 				API.selectSynch.add(option);	
@@ -51,7 +62,7 @@ const API = {
 
 	setUrl: {
 		getAll: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/getAll',
-		getId:  'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/',
+		getId:  'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/get/',
 		create: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/create',
 		update: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/update',
 		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete'
@@ -60,8 +71,7 @@ const API = {
 	ajax: function(url, method, eventID) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open(method, url, true);
-
-		//xhttp.setRequestHeader('Content-Type', 'application/json')
+		// xhttp.setRequestHeader('Content-Type', 'application/json');
 		xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 
@@ -76,7 +86,7 @@ const API = {
 		        }
 
 		        if(eventID === 2) {
-		        	window.alert("ddd");
+		        	API.showItem(res);
 		        }
 		    }
 		};
@@ -93,7 +103,8 @@ const API = {
 			}
 
 			if(e.target.id === "select-synch") {
-				API.ajax(API.setUrl.getAll, 'GET', 2);
+				let id = e.target.selectedOptions[0].dataset.id;
+				API.ajax(API.setUrl.getId + id, 'GET', 2);
 			}
 		}
 		
@@ -105,7 +116,7 @@ const API = {
 	initEvents: function() {
 		this.checkAction();
 		this.btnSearchFull.addEventListener("click", this.checkAction, false);
-		this.selectSynch.addEventListener("change", this.checkAction, false);		
+		this.selectSynch.addEventListener("click", this.checkAction, true);	
 	}
 }
 
