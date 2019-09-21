@@ -80,17 +80,35 @@
 
       <form style="margin-top: 100px;">
         <div class="form-group">
-        <div>Wyszukaj nieruchomość w konkretnym mieście</div>
-        <!-- <input id="city​-synch" type="txt" name=""> -->
-        
+        <div>Wyszukaj nieruchomość w konkretnym mieście</div>        
         <select id="select-synch">
           <option disabled="disabled">Szukaj</option>
           <option disabled="disabled">......</option>
         </select>
-
         <div id="estate-id"></div>
+      </form>
 
-        <!-- <button id="btn-search-id" type="submit" class="btn btn-primary">Szukaj nieruchomość</button> -->
+      <form style="margin-top: 100px;">
+          <div class="form-group">
+          <div>Utwórz nieruchomość</div>
+
+            <!-- "city": "Gdańsk",
+            "street": "Test",
+            "property": "6",
+            "apartment": "6",
+            "price": "5000.00",
+            "type": "1",
+            "description": "Test 00" -->
+
+          <input type="txt" id="city" data-value="">
+          <input type="txt" id="street" data-value="">
+          <input type="number" id="property" data-value="">
+          <input type="number" id="apartment" data-value="">
+          <input type="number" id="price" data-value="">
+          <input type="number" id="type" data-value="">
+          <input type="txt" id="description" data-value="">
+
+          <button style="margin-top: 20px" id="btn-create" type="submit" class="btn btn-primary">Utwórz</button>
       </form>
 
 

@@ -2,11 +2,47 @@ const API = {
 
 	btnSearchFull: document.getElementById("btn-search-full"),
 	btnSearchId: document.getElementById("btn-search-id"),
-
+	btnCreate: document.getElementById("btn-create"),
 	selectSynch:document.getElementById("select-synch"),
-
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
+
+	getValueToCreate: function() {
+		let newElementEstate = document.querySelectorAll('[data-value]');
+		let sendData = {};
+
+		for (let i = 0; i < newElementEstate.length; i++) {
+			if(newElementEstate[i].id === "city"){
+				sendData.city = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "street"){
+				sendData.street = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "property"){
+				sendData.property = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "apartment"){
+				sendData.apartment = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "price"){
+				sendData.price = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "type"){
+				sendData.type = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "description"){
+				sendData.description = newElementEstate[i].value;
+			}
+		}
+
+		return JSON.stringify(sendData);
+	},
 
 	showItem: function(res) {
 
@@ -68,10 +104,9 @@ const API = {
 		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete'
 	},
 
-	ajax: function(url, method, eventID) {
+	ajax: function(url, method, eventID, json) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open(method, url, true);
-		// xhttp.setRequestHeader('Content-Type', 'application/json');
 		xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 
@@ -88,10 +123,16 @@ const API = {
 		        if(eventID === 2) {
 		        	API.showItem(res);
 		        }
+
+		        if(eventID === 3) {
+		        	if(res.status === "success") {
+		        		alert("Dane wysłane prawidłowo");
+		        	}
+		        }
 		    }
 		};
 
-		xhttp.send();
+		xhttp.send(json);
 	},
 
 	checkAction: function(e) {
@@ -106,6 +147,11 @@ const API = {
 				let id = e.target.selectedOptions[0].dataset.id;
 				API.ajax(API.setUrl.getId + id, 'GET', 2);
 			}
+
+			if(e.target.id === "btn-create") {
+				console.log(API.getValueToCreate());
+				API.ajax(API.setUrl.create, 'POST', 3, API.getValueToCreate());
+			}
 		}
 		
 		(function(){
@@ -117,6 +163,7 @@ const API = {
 		this.checkAction();
 		this.btnSearchFull.addEventListener("click", this.checkAction, false);
 		this.selectSynch.addEventListener("click", this.checkAction, true);	
+		this.btnCreate.addEventListener("click", this.checkAction, true);
 	}
 }
 
