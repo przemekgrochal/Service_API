@@ -68,11 +68,15 @@ const API = {
 		        let res = JSON.parse(this.response);
 
 		        if(eventID === 0) {
-		        	API.showResult(res);
+		        	API.completeSelect(res);
 		        }
 
 		        if(eventID === 1) {
-		        	API.completeSelect(res);
+		        	API.showResult(res);
+		        }
+
+		        if(eventID === 2) {
+		        	window.alert("ddd");
 		        }
 		    }
 		};
@@ -85,16 +89,16 @@ const API = {
 			e.preventDefault();
 
 			if(e.target.id === "btn-search-full") {
-				API.ajax(API.setUrl.getAll, 'GET', 0);
+				API.ajax(API.setUrl.getAll, 'GET', 1);
 			}
 
-			// if(e.target.id === "select-synch") {
-			// 	API.ajax(API.setUrl.getAll, 'GET', 1);
-			// }
+			if(e.target.id === "select-synch") {
+				API.ajax(API.setUrl.getAll, 'GET', 2);
+			}
 		}
 		
 		(function(){
-			API.ajax(API.setUrl.getAll, 'GET', 1);	
+			API.ajax(API.setUrl.getAll, 'GET', 0);	
 		})();
 	},
 
