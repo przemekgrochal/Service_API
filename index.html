@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title></title>
-
-  <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
   <link href="css/grayscale.min.css" rel="stylesheet">
 
+  <style>
+    .estate-wrapper {
+      border: 1px solid blue;
+    }
+  </style>
 </head>
 
 <body id="page-top">
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +44,6 @@
     </div>
   </nav>
 
-  <!-- Header -->
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
@@ -60,7 +54,6 @@
     </div>
   </header>
 
-  <!-- About Section -->
   <section id="about" class="about-section text-center">
     <div class="container">
       <div class="row">
@@ -73,9 +66,8 @@
       <img src="img/ipad.png" class="img-fluid" alt="">
     </div>
   </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="projects-section bg-light">
+ -->
+  <section style="border: 1px solid red;" id="projects" class="projects-section bg-light">
     <div class="container">
 
       <div id="estate"></div>
@@ -88,16 +80,22 @@
 
       <form style="margin-top: 100px;">
         <div class="form-group">
-        <div>Wyszukaj nieruchomość</div>
-        <button id="btn-search-id" type="submit" class="btn btn-primary">Szukaj nieruchomość</button>
+        <div>Wyszukaj nieruchomość w konkretnym mieście</div>
+        <!-- <input id="city​-synch" type="txt" name=""> -->
+        
+        <select id="select-synch">
+          <option disabled="disabled">Szukaj</option>
+          <option disabled="disabled">......</option>
+        </select>
+
+        <!-- <button id="btn-search-id" type="submit" class="btn btn-primary">Szukaj nieruchomość</button> -->
       </form>
 
 
     </div>
   </section>
 
-  <!-- Signup Section -->
-  <section id="signup" class="signup-section">
+ <!--  <section id="signup" class="signup-section">
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
@@ -115,7 +113,6 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
   <section class="contact-section bg-black">
     <div class="container">
 
@@ -172,22 +169,18 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="bg-black small text-center text-white-50">
     <div class="container">
       Copyright &copy; Your Website 2019
     </div>
   </footer>
-
-  <!-- Bootstrap core JavaScript -->
+ -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Custom scripts for this template -->
-  <script src="js/grayscale.min.js"></script>
+  <!-- <script src="js/grayscale.min.js"></script> -->
   <script src="js/main.js"></script>
 </body>
 </html>
