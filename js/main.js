@@ -128,11 +128,15 @@ const API = {
 	showItem: function(res) {
 		let html = 
 			'<div class="estate-wrapper" data-remove="remove" data-id="'+ res.data.id +'">' +
-				'<div>' +
+				'<img class="estate-img" src="https://repo.propertygrouppoland.pl/storage/estates/8665103/medium/1_IS_1.jpg"/>' +
+				'<div class="estate-box">' +
 					'<div>' + res.data.city + '</div>' +
 					'<div>' + res.data.apartment + '</div>' +
 					'<div>' + res.data.price + '</div>' +
 					'<div>' + res.data.street + '</div>' +
+					'<div>' + res.data.property + '</div>' +
+					'<div>' + res.data.type + '</div>' +
+					'<div>' + res.data.description + '</div>' +
 				'</div>' +	
 				'<div>' +
 					'<button data-x="x" class="estate-x">x</button>' +
@@ -168,11 +172,15 @@ const API = {
 		function buildHTML(data) {
 			html += 
 				'<div class="estate-wrapper" data-remove="remove" data-id="'+ data.id +'">' +
-					'<div>' +
+					'<img class="estate-img" src="https://repo.propertygrouppoland.pl/storage/estates/8665103/medium/1_IS_1.jpg"/>' +
+					'<div class="estate-box">' +
 						'<div>' + data.city + '</div>' +
 						'<div>' + data.apartment + '</div>' +
 						'<div>' + data.price + '</div>' +
 						'<div>' + data.street + '</div>' +
+						'<div>' + data.property + '</div>' +
+						'<div>' + data.type + '</div>' +
+						'<div>' + data.description + '</div>' +
 					'</div>' +	
 					'<div>' +
 						'<button data-x="x" class="estate-x">x</button>' +
