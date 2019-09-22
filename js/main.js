@@ -8,6 +8,14 @@ const API = {
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
 
+	removeAllItems: function() {
+		let items = document.querySelectorAll('[data-remove="remove"]');
+
+		for(let i = 0; i < items.length; i++) {
+			items[i].remove();
+		}
+	},
+
 	checkItemToRemove: function(item) {
 		let parent = item.parentElement.parentElement;
 		parent.remove();
@@ -97,7 +105,7 @@ const API = {
 		let html = '';
 		function buildHTML(data) {
 			html += `
-				<div class="estate-wrapper" data-id="${data.id}">
+				<div class="estate-wrapper" data-remove="remove" data-id="${data.id}">
 					<div>
 						<div>${data.city}</div>
 						<div>${data.apartment}</div>
@@ -125,7 +133,7 @@ const API = {
 		create: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/create',
 		update: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/update',
 		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete/',
-		deleteAll: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete/All'
+		deleteAll: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/deleteAll'
 	},
 
 	ajax: function(url, method, eventID, json) {
@@ -158,12 +166,10 @@ const API = {
 		        }
 
 		        if(eventID === 4) {
-		        	console.log(res);
 		        	API.getBtnRemove();
 		        }
 
 		        if(eventID === 5) {
-		        	console.log(res);
 		        	API.getBtnRemove();
 		        	API.btnRemoveAll.style.display = "none";
 		        }
@@ -195,6 +201,7 @@ const API = {
 			}
 
 			if(e.target.id === "btn-remove-all") {
+				API.removeAllItems();
 				API.ajax(API.setUrl.deleteAll, 'POST', 5);
 			}
 		}
