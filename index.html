@@ -25,6 +25,13 @@
       display: none;
       margin-top: 50px;
     }
+    .modal-wrapper {
+      position: absolute;
+      top: 30%;
+      z-index: 9999;
+      background-color: grey;
+      padding: 50px;
+    }
   </style>
 </head>
 
@@ -102,17 +109,18 @@
           <div class="form-group">
           <div>Utwórz nieruchomość</div>
 
-          <input type="txt" id="city" data-value="x">
-          <input type="txt" id="street" data-value="x">
-          <input type="number" id="property" data-value="x">
-          <input type="number" id="apartment" data-value="x">
-          <input type="number" id="price" data-value="x">
-          <input type="number" id="type" data-value="x">
-          <input type="txt" id="description" data-value="x">
+          <input type="txt" id="city" data-input="txt">
+          <input type="txt" id="street" data-input="txt">
+          <input type="number" id="property" data-input="number">
+          <input type="number" id="apartment" data-input="number">
+          <input type="number" id="price" data-input="number">
+          <input type="number" id="type" data-input="number">
+          <input type="txt" id="description" data-input="txt">
 
           <button style="margin-top: 20px" id="btn-create" type="submit" class="btn btn-primary">Utwórz</button>
       </form>
 
+      <div id="update-item"></div>
 
     </div>
   </section>

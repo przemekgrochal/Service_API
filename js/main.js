@@ -8,6 +8,91 @@ const API = {
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
 
+	getUpdateItem: function(item) {
+		let htmlInputNumber = document.querySelectorAll('[data-input="number"]');
+		let htmlInputTxt = document.querySelectorAll('[data-input="txt"]');
+
+		let itemId = item.parentElement.parentElement.dataset.id;
+
+		function createInput(quantity, type) {
+			newInputs = [];
+			for (let i = 0; i < quantity.length; i++) {
+				let input = document.createElement("input");
+				input.setAttribute("type", type);
+				newInputs.push(input);
+			}
+			return newInputs;
+		}
+
+		let inputTxt = createInput(htmlInputTxt, 'txt');
+		let inputNumber = createInput(htmlInputNumber, 'number');
+		let btn = document.createElement("button");
+			btn.setAttribute("id", "modal-btn-submit");
+			btn.textContent = "Edytuj Wpis";
+			btn.setAttribute("class", "btn btn-primary");
+
+		let modal = document.createElement("div");
+			modal.setAttribute("class", "modal-wrapper");
+
+		function appendNodeInput(input) {
+			for (let i = 0; i < input.length; i++) {
+				modal.appendChild(input[i]);
+			}	
+		}
+
+		appendNodeInput(inputTxt);
+		appendNodeInput(inputNumber);
+
+		modal.appendChild(btn);
+		document.getElementById("update-item").appendChild(modal);
+
+
+		function getValueToUpdate() {
+			let updatedElements = document.querySelectorAll('[data-value]');
+			let sendDataUpdate = {};
+
+			for (let i = 0; i < updatedElements.length; i++) {
+				if(updatedElements[i].id === "city"){
+					sendDataUpdate.city = updatedElements[i].value;
+				}
+
+				if(updatedElements[i].id === "street"){
+					sendDataUpdate.street = updatedElements[i].value;
+				}
+
+				if(updatedElements[i].id === "property"){
+					sendDataUpdate.property = updatedElements[i].value;
+				}
+
+				if(updatedElements[i].id === "apartment"){
+					sendDataUpdate.apartment = updatedElements[i].value;
+				}
+
+				if(updatedElements[i].id === "price"){
+					sendDataUpdate.price = updatedElements[i].value;
+				}
+
+				if(updatedElements[i].id === "type"){
+					sendDataUpdate.type = updatedElements[i].value;
+				}
+
+				if(updatedElements[i].id === "description"){
+					sendDataUpdate.description = updatedElements[i].value;
+				}
+			}
+
+			return JSON.stringify(sendDataUpdate);
+		}
+	},
+
+	getBtnUpdate: function() {
+		let items = document.querySelectorAll('[data-update="update"]');
+
+		for(let i = 0; i < items.length; i++) {
+			items[i].addEventListener("click", API.checkAction, false);			
+		}
+	},
+
 	removeAllItems: function() {
 		let items = document.querySelectorAll('[data-remove="remove"]');
 
@@ -80,7 +165,7 @@ const API = {
 				'</div>' +	
 				'<div>' +
 					'<button data-x="x" class="estate-x">x</button>' +
-					'<button data-x="x" class="estate-x">Aktualizuj</button>' +
+					'<button data-update="update">Aktualizuj</button>' +
 				'</div>' +
 			'</div>'
 		;
@@ -120,7 +205,7 @@ const API = {
 					'</div>' +	
 					'<div>' +
 						'<button data-x="x" class="estate-x">x</button>' +
-						'<button>Aktualizuj</button>' +
+						'<button data-update="update">Aktualizuj</button>' +
 					'</div>' +
 				'</div>'
 			;
@@ -166,27 +251,38 @@ const API = {
 		        if(eventID === 1) {
 		        	API.showLotItems(res);
 		        	API.getBtnRemove();
+		        	API.getBtnUpdate();
 		        }
 
 		        if(eventID === 2) {
 		        	API.showItem(res);
 		        	API.getBtnRemove();
+		        	API.getBtnUpdate();
 		        }
 
 		        if(eventID === 3) {
 		        	if(res.status === "success") {
 		        		alert("Dane wysłane prawidłowo");
 		        		API.getBtnRemove();
+		        		API.getBtnUpdate();
 		        	}
 		        }
 
 		        if(eventID === 4) {
 		        	API.getBtnRemove();
+		        	API.getBtnUpdate();
 		        }
 
 		        if(eventID === 5) {
 		        	API.getBtnRemove();
+		        	API.getBtnUpdate();
 		        	API.btnRemoveAll.style.display = "none";
+		        }
+
+		        if(eventID === 6) {
+		        	API.getBtnRemove();
+		        	API.getBtnUpdate();
+		        	console.log(res);
 		        }
 		    }
 		};
@@ -218,6 +314,11 @@ const API = {
 			if(e.target.id === "btn-remove-all") {
 				API.removeAllItems();
 				API.ajax(API.setUrl.deleteAll, 'POST', 5);
+			}
+
+			if(e.target.dataset.update === "update") {
+				API.getUpdateItem(e.target);
+				// API.ajax(API.setUrl.update, 'POST', 6, API.getValueToUpdate());
 			}
 		}
 		
