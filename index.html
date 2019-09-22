@@ -21,6 +21,10 @@
     .estate-x {
       color: red;
     }
+    .btn-remove-all {
+      display: none;
+      margin-top: 50px;
+    }
   </style>
 </head>
 
@@ -81,6 +85,7 @@
         <div class="form-group">
         <div>Zobacz wszystkie nieruchomości</div>
         <button id="btn-search-full" type="submit" class="btn btn-primary">Szukaj wszystkich</button>
+        <button id="btn-remove-all" type="submit" class="btn btn-primary btn-remove-all">Usuń wszystkie</button>
       </form>
 
       <form style="margin-top: 100px;">
@@ -96,14 +101,6 @@
       <form style="margin-top: 100px;">
           <div class="form-group">
           <div>Utwórz nieruchomość</div>
-
-            <!-- "city": "Gdańsk",
-            "street": "Test",
-            "property": "6",
-            "apartment": "6",
-            "price": "5000.00",
-            "type": "1",
-            "description": "Test 00" -->
 
           <input type="txt" id="city" data-value="x">
           <input type="txt" id="street" data-value="x">

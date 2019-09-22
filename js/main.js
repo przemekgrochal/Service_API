@@ -3,6 +3,7 @@ const API = {
 	btnSearchFull: document.getElementById("btn-search-full"),
 	btnSearchId: document.getElementById("btn-search-id"),
 	btnCreate: document.getElementById("btn-create"),
+	btnRemoveAll: document.getElementById("btn-remove-all"),
 	selectSynch:document.getElementById("select-synch"),
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
@@ -61,7 +62,6 @@ const API = {
 	},
 
 	showItem: function(res) {
-
 		let html = `
 			<div class="estate-wrapper">
 				<div>${res.data.city}</div>
@@ -91,7 +91,9 @@ const API = {
 		}
 	},
 
-	showLotItems: function(res) {		
+	showLotItems: function(res) {	
+		this.btnRemoveAll.style.display = "block";
+
 		let html = '';
 		function buildHTML(data) {
 			html += `
@@ -122,7 +124,8 @@ const API = {
 		getId:  'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/get/',
 		create: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/create',
 		update: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/update',
-		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete/'
+		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete/',
+		deleteAll: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete/All'
 	},
 
 	ajax: function(url, method, eventID, json) {
@@ -158,6 +161,12 @@ const API = {
 		        	console.log(res);
 		        	API.getBtnRemove();
 		        }
+
+		        if(eventID === 5) {
+		        	console.log(res);
+		        	API.getBtnRemove();
+		        	API.btnRemoveAll.style.display = "none";
+		        }
 		    }
 		};
 
@@ -184,6 +193,10 @@ const API = {
 			if(e.target.dataset.x === "x") {
 				API.ajax(API.setUrl.delete + API.checkItemToRemove(e.target), 'POST', 4);
 			}
+
+			if(e.target.id === "btn-remove-all") {
+				API.ajax(API.setUrl.deleteAll, 'POST', 5);
+			}
 		}
 		
 		(function(){
@@ -196,6 +209,7 @@ const API = {
 		this.btnSearchFull.addEventListener("click", this.checkAction, false);
 		this.selectSynch.addEventListener("click", this.checkAction, true);	
 		this.btnCreate.addEventListener("click", this.checkAction, true);
+		this.btnRemoveAll.addEventListener("click", this.checkAction, false);
 	}
 }
 
