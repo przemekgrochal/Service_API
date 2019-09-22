@@ -70,14 +70,14 @@ const API = {
 	},
 
 	showItem: function(res) {
-		let html = `
-			<div class="estate-wrapper">
-				<div>${res.data.city}</div>
-				<div>${res.data.apartment}</div>
-				<div>${res.data.price}</div>
-				<div>${res.data.street}</div>
-			</div>
-		`;
+		let html = 
+			'<div class="estate-wrapper">' +
+				'<div>' + res.data.city + '</div>' +
+				'<div>' + res.data.apartment + '</div>' +
+				'<div>' + res.data.price + '</div>' +
+				'<div>' + res.data.street + '</div>' +
+			'</div>'
+		;
 
 		API.divEstateId.innerHTML = html;
 	},
@@ -104,19 +104,20 @@ const API = {
 
 		let html = '';
 		function buildHTML(data) {
-			html += `
-				<div class="estate-wrapper" data-remove="remove" data-id="${data.id}">
-					<div>
-						<div>${data.city}</div>
-						<div>${data.apartment}</div>
-						<div>${data.price}</div>
-						<div>${data.street}</div>
-					</div>
-					<div>
-						<button data-x="x" class="estate-x">x</button>
-					</div>
-				</div>
-			`;
+			html += 
+				'<div class="estate-wrapper" data-remove="remove" data-id="'+ data.id +'">' +
+					'<div>' +
+						'<div>' + data.city + '</div>' +
+						'<div>' + data.apartment + '</div>' +
+						'<div>' + data.price + '</div>' +
+						'<div>' + data.street + '</div>' +
+					'</div>' +	
+					'<div>' +
+						'<button data-x="x" class="estate-x">x</button>' +
+					'</div>' +
+				'</div>'
+			;
+
 			return html;
 		}
 
