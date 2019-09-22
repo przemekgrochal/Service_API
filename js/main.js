@@ -71,11 +71,17 @@ const API = {
 
 	showItem: function(res) {
 		let html = 
-			'<div class="estate-wrapper">' +
-				'<div>' + res.data.city + '</div>' +
-				'<div>' + res.data.apartment + '</div>' +
-				'<div>' + res.data.price + '</div>' +
-				'<div>' + res.data.street + '</div>' +
+			'<div class="estate-wrapper" data-remove="remove" data-id="'+ res.data.id +'">' +
+				'<div>' +
+					'<div>' + res.data.city + '</div>' +
+					'<div>' + res.data.apartment + '</div>' +
+					'<div>' + res.data.price + '</div>' +
+					'<div>' + res.data.street + '</div>' +
+				'</div>' +	
+				'<div>' +
+					'<button data-x="x" class="estate-x">x</button>' +
+					'<button data-x="x" class="estate-x">Aktualizuj</button>' +
+				'</div>' +
 			'</div>'
 		;
 
@@ -114,6 +120,7 @@ const API = {
 					'</div>' +	
 					'<div>' +
 						'<button data-x="x" class="estate-x">x</button>' +
+						'<button data-x="x" class="estate-x">Aktualizuj</button>' +
 					'</div>' +
 				'</div>'
 			;
