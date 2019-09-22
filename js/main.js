@@ -139,6 +139,13 @@ const API = {
 	ajax: function(url, method, eventID, json) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open(method, url, true);
+
+		// if(json !== 'undefined') {
+		// 	xhttp.setRequestHeader('Content-Type', 'application/json');
+		// } else {
+		// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		// }
+
 		xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 
