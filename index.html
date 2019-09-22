@@ -15,6 +15,11 @@
   <style>
     .estate-wrapper {
       border: 1px solid blue;
+      display: flex;
+      justify-content: space-between;
+    }
+    .estate-x {
+      color: red;
     }
   </style>
 </head>
@@ -100,13 +105,13 @@
             "type": "1",
             "description": "Test 00" -->
 
-          <input type="txt" id="city" data-value="">
-          <input type="txt" id="street" data-value="">
-          <input type="number" id="property" data-value="">
-          <input type="number" id="apartment" data-value="">
-          <input type="number" id="price" data-value="">
-          <input type="number" id="type" data-value="">
-          <input type="txt" id="description" data-value="">
+          <input type="txt" id="city" data-value="x">
+          <input type="txt" id="street" data-value="x">
+          <input type="number" id="property" data-value="x">
+          <input type="number" id="apartment" data-value="x">
+          <input type="number" id="price" data-value="x">
+          <input type="number" id="type" data-value="x">
+          <input type="txt" id="description" data-value="x">
 
           <button style="margin-top: 20px" id="btn-create" type="submit" class="btn btn-primary">Utwórz</button>
       </form>

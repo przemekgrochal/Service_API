@@ -7,6 +7,22 @@ const API = {
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
 
+	checkItemToRemove: function(item) {
+		let parent = item.parentElement.parentElement;
+		parent.remove();
+
+		let itemId = item.parentElement.parentElement.dataset.id;
+		return itemId;
+	},
+
+	getBtnRemove: function() {
+		let btnRemove = document.querySelectorAll('[data-x]');
+
+		for(let i = 0; i < btnRemove.length; i++) {
+			btnRemove[i].addEventListener("click", API.checkAction, false);
+		}	
+	},
+
 	getValueToCreate: function() {
 		let newElementEstate = document.querySelectorAll('[data-value]');
 		let sendData = {};
@@ -75,15 +91,20 @@ const API = {
 		}
 	},
 
-	showResult: function(res) {		
+	showLotItems: function(res) {		
 		let html = '';
 		function buildHTML(data) {
 			html += `
-				<div class="estate-wrapper">
-					<div>${data.city}</div>
-					<div>${data.apartment}</div>
-					<div>${data.price}</div>
-					<div>${data.street}</div>
+				<div class="estate-wrapper" data-id="${data.id}">
+					<div>
+						<div>${data.city}</div>
+						<div>${data.apartment}</div>
+						<div>${data.price}</div>
+						<div>${data.street}</div>
+					</div>
+					<div>
+						<button data-x="x" class="estate-x">x</button>
+					</div>
 				</div>
 			`;
 			return html;
@@ -101,7 +122,7 @@ const API = {
 		getId:  'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/get/',
 		create: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/create',
 		update: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/update',
-		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete'
+		delete: 'https://alfa.propertygrouppoland.pl/q/przemyslawgrochal/delete/'
 	},
 
 	ajax: function(url, method, eventID, json) {
@@ -117,17 +138,25 @@ const API = {
 		        }
 
 		        if(eventID === 1) {
-		        	API.showResult(res);
+		        	API.showLotItems(res);
+		        	API.getBtnRemove();
 		        }
 
 		        if(eventID === 2) {
 		        	API.showItem(res);
+		        	API.getBtnRemove();
 		        }
 
 		        if(eventID === 3) {
 		        	if(res.status === "success") {
 		        		alert("Dane wysłane prawidłowo");
+		        		API.getBtnRemove();
 		        	}
+		        }
+
+		        if(eventID === 4) {
+		        	console.log(res);
+		        	API.getBtnRemove();
 		        }
 		    }
 		};
@@ -149,8 +178,11 @@ const API = {
 			}
 
 			if(e.target.id === "btn-create") {
-				console.log(API.getValueToCreate());
 				API.ajax(API.setUrl.create, 'POST', 3, API.getValueToCreate());
+			}
+
+			if(e.target.dataset.x === "x") {
+				API.ajax(API.setUrl.delete + API.checkItemToRemove(e.target), 'POST', 4);
 			}
 		}
 		
