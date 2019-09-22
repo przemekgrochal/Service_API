@@ -25,6 +25,16 @@
       display: none;
       margin-top: 50px;
     }
+    .edit-form {
+      display: none;
+      position: fixed;
+      top: 40%;
+      background: lightgrey;
+      padding: 50px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
 </head>
 
@@ -111,6 +121,22 @@
           <input type="txt" id="description" data-value="x">
 
           <button style="margin-top: 20px" id="btn-create" type="submit" class="btn btn-primary">Utwórz</button>
+      </form>
+
+
+      <form class="edit-form">
+          <div class="form-group">
+          <div>Edytuj wpis</div>
+
+          <input type="txt" id="city" data-value="x">
+          <input type="txt" id="street" data-value="x">
+          <input type="number" id="property" data-value="x">
+          <input type="number" id="apartment" data-value="x">
+          <input type="number" id="price" data-value="x">
+          <input type="number" id="type" data-value="x">
+          <input type="txt" id="description" data-value="x">
+
+          <button style="margin-top: 20px" id="btn-create" type="submit" class="btn btn-primary">Edytuj wpis</button>
       </form>
 
 

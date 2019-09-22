@@ -80,7 +80,7 @@ const API = {
 				'</div>' +	
 				'<div>' +
 					'<button data-x="x" class="estate-x">x</button>' +
-					'<button data-x="x" class="estate-x">Aktualizuj</button>' +
+					'<button data-update="update">Aktualizuj</button>' +
 				'</div>' +
 			'</div>'
 		;
@@ -120,7 +120,7 @@ const API = {
 					'</div>' +	
 					'<div>' +
 						'<button data-x="x" class="estate-x">x</button>' +
-						'<button>Aktualizuj</button>' +
+						'<button data-update="update">Aktualizuj</button>' +
 					'</div>' +
 				'</div>'
 			;
