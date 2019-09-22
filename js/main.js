@@ -4,11 +4,12 @@ const API = {
 	btnSearchId: document.getElementById("btn-search-id"),
 	btnCreate: document.getElementById("btn-create"),
 	btnRemoveAll: document.getElementById("btn-remove-all"),
+	btnUpdate: document.getElementById("btn-update"),
 	selectSynch:document.getElementById("select-synch"),
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
 
-		getValueToUpdate: function(itemId) {
+	getValueToUpdate: function(itemId) {
 		let newElementEstate = document.querySelectorAll('[data-value="update"]');
 		let sendData = {};
 
@@ -45,7 +46,6 @@ const API = {
 			}
 		}
 
-		console.log(JSON.stringify(sendData));
 		return JSON.stringify(sendData);
 	},
 
@@ -249,6 +249,11 @@ const API = {
 		        	API.getUpdateItem();
 		        	API.btnRemoveAll.style.display = "none";
 		        }
+
+		        if(eventID === 6) {
+		        	alert("Dane zostały zaktualizowane");
+		        	document.getElementById("edit-form").style.display = "none";
+		        }
 		    }
 		};
 
@@ -283,8 +288,11 @@ const API = {
 
 			if(e.target.dataset.update === "update") {
 				API.showUpdateForm(e.target);
-				// API.ajax(API.setUrl.update, 'POST', 6, API.getValueToUpdate());
-				// console.log(e.target);
+			}
+
+			if(e.target.id === "btn-update") {
+				let currentValue = API.getValueToUpdate(e.target);
+				API.ajax(API.setUrl.update, 'POST', 6, currentValue);
 			}
 		}
 		
@@ -299,6 +307,7 @@ const API = {
 		this.selectSynch.addEventListener("click", this.checkAction, true);	
 		this.btnCreate.addEventListener("click", this.checkAction, true);
 		this.btnRemoveAll.addEventListener("click", this.checkAction, false);
+		this.btnUpdate.addEventListener("click", this.checkAction, false);
 	}
 }
 
