@@ -8,6 +8,62 @@ const API = {
 	divEstate: document.getElementById("estate"),
 	divEstateId: document.getElementById("estate-id"),
 
+		getValueToUpdate: function(itemId) {
+		let newElementEstate = document.querySelectorAll('[data-value="update"]');
+		let sendData = {};
+
+		for (let i = 0; i < newElementEstate.length; i++) {
+
+			sendData.id = itemId;
+			
+			if(newElementEstate[i].id === "city-update"){
+				sendData.city = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "street-update"){
+				sendData.street = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "property-update"){
+				sendData.property = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "apartment-update"){
+				sendData.apartment = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "price-update"){
+				sendData.price = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "type-update"){
+				sendData.type = newElementEstate[i].value;
+			}
+
+			if(newElementEstate[i].id === "description-update"){
+				sendData.description = newElementEstate[i].value;
+			}
+		}
+
+		console.log(JSON.stringify(sendData));
+		return JSON.stringify(sendData);
+	},
+
+	showUpdateForm: function(item) {
+		let form = document.getElementById("edit-form");
+		let itemId = item.parentElement.parentElement.dataset.id;
+		form.style.display = "block";
+		API.getValueToUpdate(itemId);
+	},
+
+	getUpdateItem: function() {
+		let updateElements = document.querySelectorAll('[data-update="update"]');
+	
+		for(let i = 0; i < updateElements.length; i++) {
+			updateElements[i].addEventListener("click", API.checkAction, false);
+		}	
+	},
+
 	removeAllItems: function() {
 		let items = document.querySelectorAll('[data-remove="remove"]');
 
@@ -166,26 +222,31 @@ const API = {
 		        if(eventID === 1) {
 		        	API.showLotItems(res);
 		        	API.getBtnRemove();
+		        	API.getUpdateItem();
 		        }
 
 		        if(eventID === 2) {
 		        	API.showItem(res);
 		        	API.getBtnRemove();
+		        	API.getUpdateItem();
 		        }
 
 		        if(eventID === 3) {
 		        	if(res.status === "success") {
 		        		alert("Dane wysłane prawidłowo");
 		        		API.getBtnRemove();
+		        		API.getUpdateItem();
 		        	}
 		        }
 
 		        if(eventID === 4) {
 		        	API.getBtnRemove();
+		        	API.getUpdateItem();
 		        }
 
 		        if(eventID === 5) {
 		        	API.getBtnRemove();
+		        	API.getUpdateItem();
 		        	API.btnRemoveAll.style.display = "none";
 		        }
 		    }
@@ -218,6 +279,12 @@ const API = {
 			if(e.target.id === "btn-remove-all") {
 				API.removeAllItems();
 				API.ajax(API.setUrl.deleteAll, 'POST', 5);
+			}
+
+			if(e.target.dataset.update === "update") {
+				API.showUpdateForm(e.target);
+				// API.ajax(API.setUrl.update, 'POST', 6, API.getValueToUpdate());
+				// console.log(e.target);
 			}
 		}
 		
